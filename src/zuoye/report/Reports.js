@@ -1,6 +1,9 @@
 import React from 'react';
 import  { useState } from 'react';
 import { Table, Radio, Divider,Input } from 'antd';
+import { Upload, message, Button } from 'antd';
+import { DownloadOutlined } from '@ant-design/icons';
+
 const { Search } = Input;
 const columns = [
   {
@@ -64,17 +67,24 @@ const rowSelection = {
 
 const Demo = () => {
   const [selectionType, setSelectionType] = useState('checkbox');
-
+    
   return (
     <div>
       <div>
-        <Search
-          placeholder="input search text"
-          onSearch={value => console.log(value)}
-          style={{ width: 400 }}
-        />
+        <span style={{marginRight:40}}>城市：<Input placeholder="Basic usage" style={{ width: 200 }} /></span>
+        <span>估价师名称：<Input placeholder="Basic usage" style={{ width: 200 }} /></span>
+        <span style={{marginLeft:40}}>年份：<Input placeholder="Basic usage" style={{ width: 200 }} /></span>
+        <span style={{marginLeft:40}}>宗地编码：<Input placeholder="Basic usage" style={{ width: 200 }} /></span>
+        
         <br />
         <br />
+      </div>
+      <div style={{marginLeft:40}}>
+        <Button type="primary" icon={<DownloadOutlined />} >
+          生成报告
+        </Button>
+          <br />
+          <br />
       </div>
       <Table
         rowSelection={{
@@ -88,7 +98,8 @@ const Demo = () => {
   );
 };
 
-export default class Uploadcesuan extends React.Component{
+export default class Reports extends React.Component{
+    
     render(){
         return(
             <Demo />

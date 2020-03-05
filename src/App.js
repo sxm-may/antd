@@ -1,26 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import {HashRouter as Router ,Route,Switch} from 'react-router-dom'
+import Reports from "../zuoye/report/Reports"
+import ContentUser from '../mag/ContentUser'
+import { createBrowserHistory } from 'history';
+import Login from "../login/Login"
+import Menu from "./menu/Menu"
+
+
+export default class App extends React.Component{
+
+
+    render(){
+        return(
+            <Router history={createBrowserHistory()}>
+                <Switch>
+                    <Route exact path="/" component={Login}/>
+                    
+                    <Route path="/menu" component={Menu} />
+                    
+                    
+                </Switch>
+            </Router>
+        )
+    }
+   
+
+
 }
-
-export default App;

@@ -1,7 +1,12 @@
 import React from 'react';
 import  { useState } from 'react';
 import { Table,Input } from 'antd';
+import { Upload, message, Button } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
+
 const { Search } = Input;
+
+
 const columns = [
   {
     title: 'Name',
@@ -54,6 +59,25 @@ const data = [
   },
 ];
 
+const props = {
+  name: 'file',
+  action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+  headers: {
+    authorization: 'authorization-text',
+  },
+  onChange(info) {
+    if (info.file.status !== 'uploading') {
+      console.log(info.file, info.fileList);
+    }
+    if (info.file.status === 'done') {
+      message.success(`${info.file.name} file uploaded successfully`);
+    } else if (info.file.status === 'error') {
+      message.error(`${info.file.name} file upload failed.`);
+    }
+  },
+};
+
+
 // rowSelection object indicates the need for row selection
 const rowSelection = {
   onChange: (selectedRowKeys, selectedRows) => {
@@ -68,14 +92,17 @@ const Demo = () => {
   return (
     <div>
       <div>
-        <Search
-          placeholder="input search text"
-          onSearch={value => console.log(value)}
-          style={{ width: 400 }}
-        />
-        <br />
+       
+        <Upload {...props}>
+          <Button>
+            <UploadOutlined /> 上传测算表
+          </Button>
+        </Upload>
+      
+        <br />       
         <br />
       </div>
+      
       <Table
         rowSelection={{
           type: selectionType,
