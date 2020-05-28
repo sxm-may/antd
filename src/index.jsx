@@ -1,11 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Menu from "./menu/Menu"
-import Router from "./menu/Router"
-import Login from "./login/Login"
 
+import App from "./App"
 
 ReactDOM.render(
-  <Login />,
+  <App />,
   document.getElementById('root'),
 );

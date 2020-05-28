@@ -1,10 +1,10 @@
 import React from 'react';
 import  { useState } from 'react';
-import { Table, Radio, Divider,Input } from 'antd';
+import { Table} from 'antd';
 import { Upload, message, Button } from 'antd';
-import { DownloadOutlined } from '@ant-design/icons';
+import Menu from "../menu"
 
-const { Search } = Input;
+
 const columns = [
   {
     title: 'Name',
@@ -57,6 +57,25 @@ const data = [
   },
 ];
 
+const props = {
+  name: 'file',
+  action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+  headers: {
+    authorization: 'authorization-text',
+  },
+  onChange(info) {
+    if (info.file.status !== 'uploading') {
+      console.log(info.file, info.fileList);
+    }
+    if (info.file.status === 'done') {
+      message.success(`${info.file.name} file uploaded successfully`);
+    } else if (info.file.status === 'error') {
+      message.error(`${info.file.name} file upload failed.`);
+    }
+  },
+};
+
+
 // rowSelection object indicates the need for row selection
 const rowSelection = {
   onChange: (selectedRowKeys, selectedRows) => {
@@ -67,25 +86,23 @@ const rowSelection = {
 
 const Demo = () => {
   const [selectionType, setSelectionType] = useState('checkbox');
-    
+
   return (
+    <Menu 
+    content={
     <div>
       <div>
-        <span style={{marginRight:40}}>城市：<Input placeholder="Basic usage" style={{ width: 200 }} /></span>
-        <span>估价师名称：<Input placeholder="Basic usage" style={{ width: 200 }} /></span>
-        <span style={{marginLeft:40}}>年份：<Input placeholder="Basic usage" style={{ width: 200 }} /></span>
-        <span style={{marginLeft:40}}>宗地编码：<Input placeholder="Basic usage" style={{ width: 200 }} /></span>
-        
-        <br />
+       
+        <Upload {...props}>
+          <Button>
+           上传测算表
+          </Button>
+        </Upload>
+      
+        <br />       
         <br />
       </div>
-      <div style={{marginLeft:40}}>
-        <Button type="primary" icon={<DownloadOutlined />} >
-          生成报告
-        </Button>
-          <br />
-          <br />
-      </div>
+      
       <Table
         rowSelection={{
           type: selectionType,
@@ -95,11 +112,12 @@ const Demo = () => {
         dataSource={data}
       />
     </div>
+    }
+    />
   );
 };
 
-export default class Reports extends React.Component{
-    
+export default class Uploadcesuan extends React.Component{
     render(){
         return(
             <Demo />
